@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_invoice">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o"><!--call to the our custom_bridge_layout here-->
+                    <t t-call="mc_reports.custom_bridge_layout">
+                        <div class="page">
+                            <div class="col" align="left">
+                                <span t-if="o.partner_id.name" t-field="o.partner_id.name"/>
+                                <br/>
+                                <span t-if="o.partner_id.street" t-field="o.partner_id.street"/>
+                                <br/>
+                                <span t-if="o.partner_id.street2" t-field="o.partner_id.street2"/>
+                                <span t-if="o.partner_id.city" t-field="o.partner_id.city"/>
+                                <br/>
+                                <span t-if="o.partner_id.zip" t-field="o.partner_id.zip"/>
+                                <span t-if="o.partner_id.state_id.name" t-field="o.partner_id.state_id.name"/>
+                                <br/>
+                                <span t-if="o.partner_id.country_id.name" t-field="o.partner_id.country_id.name"/>
+                                <br/>
+                            </div>
+                            <div>
+                                <div id="informations" class="row mt32 mb32">
+                                    <div class="col-4 mw-100 mb-2 mt-3" name="invoice">
+                                        <strong>Invoice</strong>
+                                        <p class="m-0" style="color:#c0c0c0;">Invoice :
+                                            <t t-esc="o.name"/>
+                                        </p>
+                                    </div>
+                                    <div class="col-2 mw-100 mb-2 mt-3" name="invoice_date">
+                                        <strong>Invoice Date:</strong>
+                                        <p class="m-0">
+                                            <t t-esc="o.invoice_date" t-options='{"widget": "date"}'/>
+                                        </p>
+                                    </div>
+                                    <div class="col-3 mw-100 mb-2 mt-3" name="due_date">
+                                        <strong>Due Date:</strong>
+                                        <p class="m-0">
+                                            <t t-esc="o.invoice_date_due" t-options='{"widget": "date"}'/>
+                                        </p>
+                                    </div>
+                                    <div class="col-3 mw-100 mb-2 mt-3">
+
+                                    </div>
+                                </div>
+                                <table class="table table-sm o_main_table" name="invoice_line_table">
+                                    <thead>
+                                        <tr>
+                                            <th name="th_description" class="text-start" style="width:40%;">
+                                                <span>Description</span>
+                                            </th>
+                                            <th name="th_quantity" class="text-end" style="width:12%;">
+                                                <span>Quantity</span>
+                                            </th>
+                                            <th name="th_priceunit" class="text-end " style="width:12%;">
+                                                <span>Unit Price</span>
+                                            </th>
+                                            <th name="th_taxes" class="text-start" style="width:21%;">
+                                                <span>Taxes</span>
+                                            </th>
+                                            <th name="th_subtotal" class="text-end" style="width:15%;">
+                                                <span>Amount</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="invoice_tbody">
+                                        <t t-set="i" t-value="1"/>
+                                        <t t-foreach="o.invoice_line_ids" t-as="obj">
+                                            <tr style="border-top:1px solid #D3D3D3; border-bottom:1px solid #D3D3D3;">
+                                                <td name="account_invoice_line_name">
+                                                    <span style="width:40%;">
+                                                        <t t-esc="obj.name"/>
+                                                    </span>
+                                                </td>
+                                                <td class="text-end">
+                                                    <span style="width:12%;">
+                                                        <t t-esc="obj.quantity"/>
+                                                    </span>
+                                                </td>
+                                                <td class="text-end">
+                                                    <span class="text-nowrap" style="width:12%;">
+                                                        <t t-esc="obj.price_unit"/>
+                                                    </span>
+                                                </td>
+                                                <td class="text-start">
+                                                    <t t-foreach="obj.tax_ids" t-as="tax">
+                                                        <span id="line_tax_ids" style="width:21%;">
+                                                            <t t-esc="tax.name"/>
+                                                        </span>
+                                                    </t>
+
+                                                </td>
+                                                <td class="text-end o_price_total">
+                                                    <span class="text-nowrap">$
+                                                        <span class="oe_currency_value" style="width:15%;">
+                                                            <t t-esc="obj.price_subtotal"/>
+                                                        </span>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <t t-set="i" t-value="i+1"/>
+                                        </t>
+                                    </tbody>
+                                </table>
+                                <div class="clearfix">
+                                    <div id="total" class="row">
+                                        <div class="col-6 ms-auto">
+                                            <table class="table table-sm"
+                                                   style="page-break-inside: avoid; position:relative;">
+                                                <tbody>
+                                                    <tr class="o_subtotal" style="">
+                                                        <td>
+                                                            <strong>Untaxed Amount</strong>
+                                                        </td>
+                                                        <td class="text-end">
+                                                            <span>$
+                                                                <span class="oe_currency_value">
+                                                                    <t t-esc="o.amount_untaxed"/>
+                                                                </span>
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="">
+                                                        <td>
+                                                            <span class="text-nowrap">Taxes</span>
+                                                        </td>
+                                                        <td class="text-end o_price_total">
+                                                            <span class="text-nowrap">
+                                                                <t t-esc="o.amount_tax"/>
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="border-black o_total">
+                                                        <td>
+                                                            <strong>Total</strong>
+                                                        </td>
+                                                        <td class="text-end">
+                                                            <span class="text-nowrap">$
+                                                                <span class="oe_currency_value">
+                                                                    <t t-esc="o.amount_total"/>
+                                                                </span>
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br></br>
+                                <p>
+                                    Incoterm: FREE ON BOARD
+                                </p>
+                                <p>
+                                    Payment Term:
+                                    <t t-esc="o.invoice_payment_term_id.name"/>
+                                </p>
+                                <br></br>
+                                <br></br>
+                                <br></br>
+                                <p>
+                                    Please ensure that the invoice number is clearly stated on all transfer
+                                    documentation to ensure prompt and accurate
+                                    processing.
+                                </p>
+                                <p>
+                                    We sincerely appreciate your business and look forward to continuing to work
+                                    together in the future.
+                                </p>
+                                <p>
+                                    Your Trade Nomadic Team
+                                </p>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--Bridge template-->
+        <template id="custom_report_layout"><!-- Multicompany -->
+            <t t-if="not o and doc">
+                <t t-set="o" t-value="doc"/>
+            </t>
+
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+
+            <!--call to the header template--><!-- t-call = "module_name.header template id"-->
+            <t t-call="mc_reports.custom_header_layout"/><!--call to the body template-->
+            <div class="article">
+                <t t-raw="0"/>
+            </div><!--call to the footer template-->
+            <t t-call="mc_reports.custom_purchase_footer_layout"/>
+        </template>
+
+
+        <!--Template header-->
+        <template id="custom_header_layout">
+            <div class="header">
+                <div class="row">
+                    <div class="col text-center">
+                        <div>
+                            <img t-att-src="image_data_uri(o.company_id.logo)" style="width:150px;height:100px;"/>
+                        </div>
+                        <div style="border-bottom:1px solid #D3D3D3; margin-top:10px; margin-bottom:50px;"></div>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+
+        <!--Template footer-->
+        <template id="custom_purchase_footer_layout">
+            <div class="footer">
+                <div style="border-bottom:1px solid black;  margin-bottom:5px;"></div>
+                <div class="col-xs-12 pull-left">
+                    <div class="row" style="margin:0px 30px; color:rgb(22, 47, 77);">
+                        <div class="col-2" style="font-size:7.5px; line-height:2.5;">
+                            <span>
+                                <br/>
+                                <span style="margin-bottom:8px;">Trade Nomadic Co., LTD.</span>
+                                <br/>
+                                <span style="margin-bottom:8px;">57/15 Baan Balina 2 Huay Yai</span>
+                                <br/>
+                                <span style="margin-bottom:8px;">Chonburi 20150 Thailand</span>
+                                <br/>
+
+                            </span>
+                        </div>
+                        <div class="col-2" style="font-size:7.5px; line-height:2.5;">
+                            <span>
+                                <br/>
+                                <span style="margin-bottom:8px;">Managing Director: Nico Kanthak</span>
+                                <br/>
+                                <span style="margin-bottom:8px;">Tax ID: 0205565036630</span>
+                                <br/>
+                                <span style="margin-bottom:8px;">info@trade-nomadic.com</span>
+                                <br/>
+                                <br/>
+
+                            </span>
+                        </div>
+                        <div class="col-2" style="font-size:7.5px;"></div>
+                        <div class="col-2" style="font-size:7.5px;"></div>
+                        <div class="col-2" style="font-size:7.5px;">
+                        </div>
+                        <div class="col-2" style="font-size:7.5px;">
+                        </div>
+                    </div>
+                </div>
+                <div style="border-bottom:1px solid black;  margin-top:5px;"></div>
+                <div t-if="report_type == 'pdf'" class="text-muted" style="color:black; text-align:right; margin-top:5px;">
+                    Page:
+                    <span class="page"/>
+                    of
+                    <span class="topage"/>
+                </div>
+
+            </div>
+        </template>
+    </data>
+</odoo>

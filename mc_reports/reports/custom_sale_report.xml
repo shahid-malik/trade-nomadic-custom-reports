@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <report
+        id="custom_sale_report1"
+        string="Custom Sale Report"
+        model="sale.order"
+        report_type="qweb-pdf"
+        name="mc_reports.sale_report_invoice"
+        file="mc_reports.sale_report_invoice"/>
+
+
+    <record id="detail_invoice_report" model="ir.actions.report">
+        <field name="name">Detailed Invoice Report</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">mc_reports.custom_sale_report1</field>
+        <field name="report_file">mc_reports.custom_sale_report1</field>
+<!--        <field name="paperformat_id" ref="invoice_customization.paperformat_cdd"/>-->
+<!--        <field name="binding_model_id" ref="model_account_move"/>-->
+        <field name="binding_type">report</field>
+    </record>
+
+
+
+    </odoo>
