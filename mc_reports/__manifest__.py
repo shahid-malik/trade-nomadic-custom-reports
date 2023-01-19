@@ -9,9 +9,6 @@
     'summary': '',
     "website": "https://mediodconsulting.com/",
     "data": [
-        'reports/custom_sale_report.xml',
-        'reports/custom_purchase_order.xml',
-        'reports/report.xml',
         'views/invoice_inherit.xml',
         'views/custom_internal_layout.xml',
         'views/sale_report.xml',

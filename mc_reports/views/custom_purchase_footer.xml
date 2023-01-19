@@ -3,6 +3,7 @@
     <data>
         <!--Bridge template-->
         <template id="custom_report_layout"><!-- Multicompany -->
+<!--            <div class="article o_report_layout_standard" t-att-data-oe-model="doc and doc._name" t-att-data-oe-id="doc and doc.id">-->
             <t t-if="not o and doc">
                 <t t-set="o" t-value="doc"/>
             </t>
@@ -16,10 +17,11 @@
 
             <!--call to the header template--><!-- t-call = "module_name.header template id"-->
             <t t-call="mc_reports.custom_header_layout"/><!--call to the body template-->
-            <div class="article">
+            <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
                 <t t-raw="0"/>
             </div><!--call to the footer template-->
             <t t-call="mc_reports.custom_purchase_footer_layout"/>
+<!--            </div>-->
         </template>
 
 
@@ -44,7 +46,7 @@
                 <div style="border-bottom:1px solid black;  margin-bottom:5px;"></div>
                 <div class="col-xs-12 pull-left">
                     <div class="row" style="margin:0px 30px; color:rgb(22, 47, 77);">
-                        <div class="col-2" style="font-size:7.5px; line-height:2.5;">
+                        <div class="col-2" style="font-size:6.5px; line-height:2.5;  font-family: 'Serif';">
                             <span>
                                 <br/>
                                 <span style="margin-bottom:8px;">Trade Nomadic Co., LTD.</span>
@@ -56,7 +58,7 @@
 
                             </span>
                         </div>
-                        <div class="col-2" style="font-size:7.5px; line-height:2.5;">
+                        <div class="col-2" style="font-size:6.5px; line-height:2.5; font-family: 'Serif';">
                             <span>
                                 <br/>
                                 <span style="margin-bottom:8px;">Managing Director: Nico Kanthak</span>

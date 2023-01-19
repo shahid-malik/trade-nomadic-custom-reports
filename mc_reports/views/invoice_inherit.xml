@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <template id="report_invoice">
+        <template id="report_invoice_custom">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o"><!--call to the our custom_bridge_layout here-->
                     <t t-call="mc_reports.custom_bridge_layout">
@@ -23,7 +23,7 @@
                             <div>
                                 <div id="informations" class="row mt32 mb32">
                                     <div class="col-4 mw-100 mb-2 mt-3" name="invoice">
-                                        <strong>Invoice</strong>
+                                        <strong>Invoice :</strong>
                                         <p class="m-0" style="color:#c0c0c0;">Invoice :
                                             <t t-esc="o.name"/>
                                         </p>
@@ -47,19 +47,19 @@
                                 <table class="table table-sm o_main_table" name="invoice_line_table">
                                     <thead>
                                         <tr>
-                                            <th name="th_description" class="text-start" style="width:40%;">
+                                            <th name="th_description" class="text-start" style="width:60%;">
                                                 <span>Description</span>
                                             </th>
-                                            <th name="th_quantity" class="text-end" style="width:12%;">
+                                            <th name="th_quantity" class="text-end" style="width:10%;">
                                                 <span>Quantity</span>
                                             </th>
-                                            <th name="th_priceunit" class="text-end " style="width:12%;">
+                                            <th name="th_priceunit" class="text-end " style="width:10%;">
                                                 <span>Unit Price</span>
                                             </th>
-                                            <th name="th_taxes" class="text-start" style="width:21%;">
+                                            <th name="th_taxes" class="text-start" style="width:10%;">
                                                 <span>Taxes</span>
                                             </th>
-                                            <th name="th_subtotal" class="text-end" style="width:15%;">
+                                            <th name="th_subtotal" class="text-end" style="width:10%;">
                                                 <span>Amount</span>
                                             </th>
                                         </tr>
@@ -69,23 +69,23 @@
                                         <t t-foreach="o.invoice_line_ids" t-as="obj">
                                             <tr style="border-top:1px solid #D3D3D3; border-bottom:1px solid #D3D3D3;">
                                                 <td name="account_invoice_line_name">
-                                                    <span style="width:40%;">
+                                                    <span style="width:60%; font-size:12px;">
                                                         <t t-esc="obj.name"/>
                                                     </span>
                                                 </td>
                                                 <td class="text-end">
-                                                    <span style="width:12%;">
+                                                    <span style="width:10%; font-size:14px;">
                                                         <t t-esc="obj.quantity"/>
                                                     </span>
                                                 </td>
                                                 <td class="text-end">
-                                                    <span class="text-nowrap" style="width:12%;">
-                                                        <t t-esc="obj.price_unit"/>
+                                                    <span class="text-nowrap" style="width:10%; font-size:14px;">
+                                                        <t t-esc="'%.2f'% obj.price_unit" data-oe-t-inline="true"/>
                                                     </span>
                                                 </td>
                                                 <td class="text-start">
                                                     <t t-foreach="obj.tax_ids" t-as="tax">
-                                                        <span id="line_tax_ids" style="width:21%;">
+                                                        <span id="line_tax_ids" style="width:10%; font-size:14px;">
                                                             <t t-esc="tax.name"/>
                                                         </span>
                                                     </t>
@@ -93,8 +93,8 @@
                                                 </td>
                                                 <td class="text-end o_price_total">
                                                     <span class="text-nowrap">$
-                                                        <span class="oe_currency_value" style="width:15%;">
-                                                            <t t-esc="obj.price_subtotal"/>
+                                                        <span class="oe_currency_value" style="width:10%; font-size:14px;">
+                                                            <t t-esc="'%.2f'% obj.price_subtotal" data-oe-t-inline="true"/>
                                                         </span>
                                                     </span>
                                                 </td>
@@ -116,7 +116,7 @@
                                                         <td class="text-end">
                                                             <span>$
                                                                 <span class="oe_currency_value">
-                                                                    <t t-esc="o.amount_untaxed"/>
+                                                                    <t t-esc="'%.2f'% o.amount_untaxed" data-oe-t-inline="true"/>
                                                                 </span>
                                                             </span>
                                                         </td>
@@ -125,9 +125,9 @@
                                                         <td>
                                                             <span class="text-nowrap">Taxes</span>
                                                         </td>
-                                                        <td class="text-end o_price_total">
+                                                        <td class="text-end o_price_total">$
                                                             <span class="text-nowrap">
-                                                                <t t-esc="o.amount_tax"/>
+                                                                <t t-esc="'%.2f'% o.amount_tax" data-oe-t-inline="true"/>
                                                             </span>
                                                         </td>
                                                     </tr>
@@ -138,7 +138,7 @@
                                                         <td class="text-end">
                                                             <span class="text-nowrap">$
                                                                 <span class="oe_currency_value">
-                                                                    <t t-esc="o.amount_total"/>
+                                                                    <t t-esc="'%.2f'% o.amount_total" data-oe-t-inline="true"/>
                                                                 </span>
                                                             </span>
                                                         </td>
@@ -150,25 +150,25 @@
                                 </div>
                                 <br></br>
                                 <p>
-                                    Incoterm: FREE ON BOARD
+                                    Incoterm: <span style=" font-family: 'Serif'; font-weight: lighter; font-size:14px;">FREE ON BOARD</span>
                                 </p>
-                                <p>
+                                <p style=" font-family: 'Serif'; font-weight: lighter; font-size:14px;">
                                     Payment Term:
                                     <t t-esc="o.invoice_payment_term_id.name"/>
                                 </p>
                                 <br></br>
                                 <br></br>
                                 <br></br>
-                                <p>
+                                <p style=" font-family: 'Serif'; font-weight: lighter; font-size:14px;">
                                     Please ensure that the invoice number is clearly stated on all transfer
                                     documentation to ensure prompt and accurate
                                     processing.
                                 </p>
-                                <p>
+                                <p style=" font-family: 'Serif'; font-weight: lighter; font-size:14px;">
                                     We sincerely appreciate your business and look forward to continuing to work
                                     together in the future.
                                 </p>
-                                <p>
+                                <p style=" font-family: 'Serif'; font-weight: lighter; font-size:14px;">
                                     Your Trade Nomadic Team
                                 </p>
                             </div>
@@ -177,5 +177,11 @@
                 </t>
             </t>
         </template>
+        <template id="report_invoice_with_payments_inherit" inherit_id="account.report_invoice_with_payments">
+            <xpath expr="//t[@t-call='account.report_invoice_document']" position="replace">
+                <t t-call="mc_reports.report_invoice_custom" t-lang="lang"/>
+            </xpath>
+        </template>
+
     </data>
 </odoo>
