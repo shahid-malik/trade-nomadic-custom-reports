@@ -13,6 +13,7 @@
         'views/custom_internal_layout.xml',
         'views/sale_report.xml',
         'views/purchase_order.xml',
+        'views/request_for_qoute.xml',
         'views/custom_purchase_footer.xml',
     ],
     "auto_install": False,
