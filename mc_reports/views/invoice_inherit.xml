@@ -182,6 +182,11 @@
                 <t t-call="mc_reports.report_invoice_custom" t-lang="lang"/>
             </xpath>
         </template>
+<!--        <template id="report_invoice_inherit" inherit_id="account.report_invoice">-->
+<!--            <xpath expr="//t[@t-call='account.report_invoice_document']" position="replace">-->
+<!--                <t t-call="mc_reports.report_invoice_custom" t-lang="lang"/>-->
+<!--            </xpath>-->
+<!--        </template>-->
 
     </data>
 </odoo>

@@ -21,20 +21,38 @@
                             </div>
                             <div>
                                 <div id="informations" class="row mt32 mb32">
-                                    <div class="col-4 mw-100 mb-2 mt-3" name="invoice">
-                                        <strong>Request for Quote :</strong>
-                                        <p class="m-0" style="color:#c0c0c0; font-family: 'Serif'; font-weight: bold; font-size:14px;">Project Number:
-                                            <t t-esc="o.name"/>
-                                        </p>
-                                    </div>
+                                    <t t-if="o.state in ['purchase','done']">
+                                        <div class="col-4 mw-100 mb-2 mt-3" name="invoice">
+                                            <strong>Purchase Order :</strong>
+                                            <p class="m-0"
+                                               style="color:#c0c0c0; font-family: 'Serif'; font-weight: bold; font-size:14px;">
+                                                Project Number:
+                                                <t t-esc="o.name"/>
+                                            </p>
+                                        </div>
+                                    </t>
+                                    <t t-else="">
+                                        <div class="col-4 mw-100 mb-2 mt-3" name="invoice">
+                                            <strong>Request for Quote :</strong>
+                                            <p class="m-0"
+                                               style="color:#c0c0c0; font-family: 'Serif'; font-weight: bold; font-size:14px;">
+                                                Project Number:
+                                                <t t-esc="o.name"/>
+                                            </p>
+                                        </div>
+                                    </t>
                                     <div class="col-2 mw-100 mb-2 mt-3" name="date_order">
-                                        <strong style="font-family: 'Serif'; font-weight: lighter; font-size:14px;">RFQ Date:</strong>
+                                        <strong style="font-family: 'Serif'; font-weight: lighter; font-size:14px;">RFQ
+                                            Date:
+                                        </strong>
                                         <p class="m-0">
                                             <t t-esc="o.date_order" t-options='{"widget": "date"}'/>
                                         </p>
                                     </div>
                                     <div class="col-3 mw-100 mb-2 mt-3" name="due_date">
-                                        <strong style="font-family: 'Serif'; font-weight: lighter; font-size:14px;">Due Date</strong>
+                                        <strong style="font-family: 'Serif'; font-weight: lighter; font-size:14px;">Due
+                                            Date
+                                        </strong>
                                         <p class="m-0">
                                             <t t-esc="o.date_planned" t-options='{"widget": "date"}'/>
                                         </p>
@@ -92,8 +110,10 @@
                                                 </td>
                                                 <td class="text-end o_price_total">
                                                     <span class="text-nowrap">$
-                                                        <span class="oe_currency_value" style="width:10%; font-size:14px;">
-                                                            <t t-esc="'%.2f'% obj.price_subtotal" data-oe-t-inline="true"/>
+                                                        <span class="oe_currency_value"
+                                                              style="width:10%; font-size:14px;">
+                                                            <t t-esc="'%.2f'% obj.price_subtotal"
+                                                               data-oe-t-inline="true"/>
                                                         </span>
                                                     </span>
                                                 </td>
@@ -115,7 +135,8 @@
                                                         <td class="text-end">
                                                             <span>$
                                                                 <span class="oe_currency_value">
-                                                                    <t t-esc="'%.2f'% o.amount_untaxed" data-oe-t-inline="true"/>
+                                                                    <t t-esc="'%.2f'% o.amount_untaxed"
+                                                                       data-oe-t-inline="true"/>
                                                                 </span>
                                                             </span>
                                                         </td>
@@ -126,7 +147,8 @@
                                                         </td>
                                                         <td class="text-end o_price_total">$
                                                             <span class="text-nowrap">
-                                                                <t t-esc="'%.2f'% o.amount_tax" data-oe-t-inline="true"/>
+                                                                <t t-esc="'%.2f'% o.amount_tax"
+                                                                   data-oe-t-inline="true"/>
                                                             </span>
                                                         </td>
                                                     </tr>
@@ -137,7 +159,8 @@
                                                         <td class="text-end">
                                                             <span class="text-nowrap">$
                                                                 <span class="oe_currency_value">
-                                                                    <t t-esc="'%.2f'% o.amount_total" data-oe-t-inline="true"/>
+                                                                    <t t-esc="'%.2f'% o.amount_total"
+                                                                       data-oe-t-inline="true"/>
                                                                 </span>
                                                             </span>
                                                         </td>
@@ -149,7 +172,10 @@
                                 </div>
                                 <br></br>
                                 <p>
-                                    Incoterm: <span style="font-family: 'Serif'; font-weight: lighter; font-size:14px;">FREE ON BOARD</span>
+                                    Incoterm:
+                                    <span style="font-family: 'Serif'; font-weight: lighter; font-size:14px;">FREE ON
+                                        BOARD
+                                    </span>
                                 </p>
                                 <br></br>
                                 <br></br>
@@ -162,15 +188,15 @@
                                     services, to be submitted no later than
                                     the specified deadline.
                                     <br></br>
-                                     In case of any questions, please feel free to contact your designated contact
+                                    In case of any questions, please feel free to contact your designated contact
                                     partner at Trade Nomadic for further
                                     assistance.
                                 </p>
-<!--                                <p style="width:95%;  line-height: 2.2;">-->
-<!--                                    In case of any questions, please feel free to contact your designated contact-->
-<!--                                    partner at Trade Nomadic for further-->
-<!--                                    assistance.-->
-<!--                                </p>-->
+                                <!--                                <p style="width:95%;  line-height: 2.2;">-->
+                                <!--                                    In case of any questions, please feel free to contact your designated contact-->
+                                <!--                                    partner at Trade Nomadic for further-->
+                                <!--                                    assistance.-->
+                                <!--                                </p>-->
                                 <p style="font-family: 'Serif'; font-weight: lighter; font-size:14px;">
                                     Your Trade Nomadic Team
                                 </p>
@@ -182,6 +208,11 @@
         </template>
         <template id="report_purchaseorder_inherit" inherit_id="purchase.report_purchaseorder">
             <xpath expr="//t[@t-call='purchase.report_purchaseorder_document']" position="replace">
+                <t t-call="mc_reports.purchase_report_invoice" t-lang="o.partner_id.lang"/>
+            </xpath>
+        </template>
+        <template id="report_purchasequotation_inherit" inherit_id="purchase.report_purchasequotation">
+            <xpath expr="//t[@t-call='purchase.report_purchasequotation_document']" position="replace">
                 <t t-call="mc_reports.purchase_report_invoice" t-lang="o.partner_id.lang"/>
             </xpath>
         </template>
