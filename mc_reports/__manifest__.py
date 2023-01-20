@@ -8,6 +8,7 @@
     'currency': "USD",
     'summary': '',
     "website": "https://mediodconsulting.com/",
+    'depends': ['account','sale','purchase'],
     "data": [
         'views/invoice_inherit.xml',
         'views/custom_internal_layout.xml',

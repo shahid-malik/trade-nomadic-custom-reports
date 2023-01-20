@@ -69,9 +69,9 @@
                                         <t t-foreach="o.invoice_line_ids" t-as="obj">
                                             <tr style="border-top:1px solid #D3D3D3; border-bottom:1px solid #D3D3D3;">
                                                 <td name="account_invoice_line_name">
-                                                    <span style="width:60%; font-size:12px;">
-                                                        <t t-esc="obj.name"/>
-                                                    </span>
+                                                    <span style="width:60%; font-size:12px;" t-esc="obj.name"/>
+<!--                                                        <t t-esc="obj.name"/>-->
+<!--                                                    </span>-->
                                                 </td>
                                                 <td class="text-end">
                                                     <span style="width:10%; font-size:14px;">
