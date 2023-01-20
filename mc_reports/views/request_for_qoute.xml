@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <template id="purchase_report_invoice">
+        <template id="purchase_report_rfq_invoice">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o"><!--call to the our custom_report_layout here-->
                     <t t-call="mc_reports.custom_report_layout">
@@ -22,7 +22,7 @@
                             <div>
                                 <div id="informations" class="row mt32 mb32">
                                     <div class="col-4 mw-100 mb-2 mt-3" name="invoice">
-                                        <strong>Purchase Order :</strong>
+                                        <strong>Request for Quote :</strong>
                                         <p class="m-0"
                                            style="color:#c0c0c0; font-family: 'Serif'; font-weight: bold; font-size:14px;">
                                             Project Number:
@@ -74,9 +74,9 @@
                                         <t t-foreach="o.order_line" t-as="obj">
                                             <tr style="">
                                                 <td name="account_invoice_line_name">
-                                                    <span style="width:60%; font-size:12px;" t-field="obj.name"/>
-<!--                                                        <t t-field="obj.name"/>-->
-<!--                                                    </span>-->
+                                                    <span style="width:60%; font-size:12px;">
+                                                        <t t-esc="obj.name"/>
+                                                    </span>
                                                 </td>
                                                 <td class="text-end">
                                                     <span style="width:10%; font-size:14px;">
@@ -194,10 +194,11 @@
                 </t>
             </t>
         </template>
-        <template id="report_purchaseorder_inherit" inherit_id="purchase.report_purchaseorder">
-            <xpath expr="//t[@t-call='purchase.report_purchaseorder_document']" position="replace">
-                <t t-call="mc_reports.purchase_report_invoice" t-lang="o.partner_id.lang"/>
+        <template id="report_purchasequotation_inherit" inherit_id="purchase.report_purchasequotation">
+            <xpath expr="//t[@t-call='purchase.report_purchasequotation_document']" position="replace">
+                <t t-call="mc_reports.purchase_report_rfq_invoice" t-lang="o.partner_id.lang"/>
             </xpath>
         </template>
+
     </data>
 </odoo>
