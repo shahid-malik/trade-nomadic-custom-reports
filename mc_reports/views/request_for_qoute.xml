@@ -205,7 +205,6 @@
                 </t>
             </t>
         </template>
-
         <template id="report_purchasequotation_inherit" inherit_id="purchase.report_purchasequotation">
             <xpath expr="//t[@t-call='purchase.report_purchasequotation_document']" position="replace">
                 <t t-call="mc_reports.purchase_report_rfq_invoice" t-lang="o.partner_id.lang"/>
