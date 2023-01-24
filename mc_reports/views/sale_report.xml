@@ -43,9 +43,8 @@
 
                                     </div>
                                 </div>
-                                <table class="table table-sm o_main_table" name="invoice_line_table">
-                                    <thead>
-                                        <tr>
+                                <table class="table" name="invoice_line_table">
+                                        <tr style="border-bottom:2px solid black;">
                                             <th name="th_description" class="text-start" style="width:60%;">
                                                 <span>Description</span>
                                             </th>
@@ -62,14 +61,12 @@
                                                 <span>Amount</span>
                                             </th>
                                         </tr>
-                                    </thead>
-                                    <tbody class="invoice_tbody">
                                         <t t-set="i" t-value="1"/>
                                         <t t-foreach="o.order_line" t-as="obj">
                                             <tr style="border-top:1px solid #D3D3D3; border-bottom:1px solid #D3D3D3;">
                                                 <td name="account_invoice_line_name">
                                                     <span style="width:60%; font-size:12px;">
-                                                        <t t-esc="obj.name"/>
+                                                        <span t-field="obj.name" t-options="{'widget': 'text'}"/>
                                                     </span>
                                                 </td>
                                                 <td class="text-end">
@@ -91,7 +88,7 @@
 
                                                 </td>
                                                 <td class="text-end o_price_total">
-                                                    <span class="text-nowrap">$
+                                                    <span class="text-nowrap"><span style="width:10%; font-size:14px;"><t t-esc="obj.currency_id.name"/></span>
                                                         <span class="oe_currency_value" style="width:10%; font-size:14px;">
                                                             <t t-esc="'%.2f'% obj.price_subtotal" data-oe-t-inline="true"/>
                                                         </span>
@@ -100,7 +97,6 @@
                                             </tr>
                                             <t t-set="i" t-value="i+1"/>
                                         </t>
-                                    </tbody>
                                 </table>
                                 <div class="clearfix">
                                     <div id="total" class="row">
@@ -113,7 +109,7 @@
                                                             <strong>Untaxed Amount</strong>
                                                         </td>
                                                         <td class="text-end">
-                                                            <span>$
+                                                            <span><span style="width:10%; font-size:14px;"><t t-esc="obj.currency_id.name"/></span>
                                                                 <span class="oe_currency_value">
                                                                     <t t-esc="'%.2f'% o.amount_untaxed" data-oe-t-inline="true"/>
                                                                 </span>
@@ -124,7 +120,7 @@
                                                         <td>
                                                             <span class="text-nowrap">Taxes</span>
                                                         </td>
-                                                        <td class="text-end o_price_total">$
+                                                        <td class="text-end o_price_total"><span style="width:10%; font-size:14px;"><t t-esc="obj.currency_id.name"/></span>
                                                             <span class="text-nowrap">
                                                                 <t t-esc="'%.2f'% o.amount_tax" data-oe-t-inline="true"/>
                                                             </span>
@@ -135,7 +131,7 @@
                                                             <strong>Total</strong>
                                                         </td>
                                                         <td class="text-end">
-                                                            <span class="text-nowrap">$
+                                                            <span class="text-nowrap"><span style="width:10%; font-size:14px;"><t t-esc="obj.currency_id.name"/></span>
                                                                 <span class="oe_currency_value">
                                                                     <t t-esc="'%.2f'% o.amount_total" data-oe-t-inline="true"/>
                                                                 </span>
