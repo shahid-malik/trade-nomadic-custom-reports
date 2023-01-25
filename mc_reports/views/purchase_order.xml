@@ -7,25 +7,57 @@
                     <t t-call="mc_reports.custom_report_layout">
                         <div class="page">
                             <div class="col" align="left">
-                                <span t-if="o.partner_id.name" t-field="o.partner_id.name"/>
-                                <span t-if="o.partner_id.street" t-field="o.partner_id.street"/>
-                                <br/>
-                                <span t-if="o.partner_id.street2" t-field="o.partner_id.street2"/>
-                                <span t-if="o.partner_id.city" t-field="o.partner_id.city"/>
-                                <br/>
-                                <span t-if="o.partner_id.zip" t-field="o.partner_id.zip"/>
-                                <span t-if="o.partner_id.state_id.name" t-field="o.partner_id.state_id.name"/>
-                                <br/>
-                                <span t-if="o.partner_id.country_id.name" t-field="o.partner_id.country_id.name"/>
-                                <br/>
+                                <t t-if="o.partner_id.company_type == 'company' ">
+                                    <span t-field="o.partner_id.name"/>
+                                    <br/>
+                                    <span t-field="o.partner_id.street"/>
+                                    <span t-field="o.partner_id.street2"/>
+                                    <br/>
+                                    <span t-field="o.partner_id.zip"/>
+                                    <span t-field="o.partner_id.city"/>
+                                    <br/>
+                                    <span t-field="o.partner_id.state_id.name"/>
+                                    <br/>
+                                    <span t-field="o.partner_id.country_id.name"/>
+                                    <br/>
+                                </t>
+                                <t t-if="o.partner_id.company_type == 'person' ">
+                                    <t t-if="o.partner_id.parent_id">
+                                        <span t-field="o.partner_id.parent_id.name"/>
+                                        <br/>
+                                        <span t-field="o.partner_id.parent_id.street"/>
+                                        <span t-field="o.partner_id.parent_id.street2"/>
+                                        <br/>
+                                        <span t-field="o.partner_id.parent_id.zip"/>
+                                        <span t-field="o.partner_id.parent_id.city"/>
+                                        <br/>
+                                        <span t-field="o.partner_id.parent_id.state_id.name"/>
+                                        <br/>
+                                        <span t-field="o.partner_id.parent_id.country_id.name"/>
+                                        <br/>
+                                    </t>
+                                    <t t-else="">
+                                        <span t-field="o.partner_id.name"/>
+                                        <br/>
+                                        <span t-field="o.partner_id.street"/>
+                                        <span t-field="o.partner_id.street2"/>
+                                        <br/>
+                                        <span t-field="o.partner_id.zip"/>
+                                        <span t-field="o.partner_id.city"/>
+                                        <br/>
+                                        <span t-field="o.partner_id.state_id.name"/>
+                                        <br/>
+                                        <span t-field="o.partner_id.country_id.name"/>
+                                        <br/>
+                                    </t>
+                                </t>
                             </div>
                             <div>
                                 <div id="informations" class="row mt32 mb32">
                                     <div class="col-4 mw-100 mb-2 mt-3" name="invoice">
-                                        <strong>Purchase Order :</strong>
+                                        <strong style="font-family: 'Serif'; font-size:16px;">Purchase Order :</strong>
                                         <p class="m-0"
                                            style="color:#c0c0c0; font-family: 'Serif'; font-weight: bold; font-size:14px;">
-                                            Project Number:
                                             <t t-esc="o.name"/>
                                         </p>
                                     </div>
@@ -34,15 +66,17 @@
                                             Date:
                                         </strong>
                                         <p class="m-0">
-                                            <t t-esc="o.date_order" t-options='{"widget": "date"}'/>
+                                            <t t-esc="o.date_order"
+                                               t-options='{"widget": "date","format": "d .MM .y"}'/>
                                         </p>
                                     </div>
                                     <div class="col-3 mw-100 mb-2 mt-3" name="due_date">
-                                        <strong style="font-family: 'Serif'; font-weight: lighter; font-size:14px;">Due
+                                        <strong style="font-family: 'Serif'; font-size:14px;">Due
                                             Date
                                         </strong>
                                         <p class="m-0">
-                                            <t t-esc="o.date_planned" t-options='{"widget": "date"}'/>
+                                            <t t-esc="o.date_planned"
+                                               t-options='{"widget": "date","format": "d .MM .y"}'/>
                                         </p>
                                     </div>
                                     <div class="col-3 mw-100 mb-2 mt-3">
@@ -50,64 +84,68 @@
                                     </div>
                                 </div>
                                 <table class="table" name="invoice_line_table">
-                                        <tr style="border-bottom:2px solid black;">
-                                            <th name="th_description" class="text-start" style="width:60%;">
-                                                <span>Description</span>
-                                            </th>
-                                            <th name="th_quantity" class="text-end" style="width:10%;">
-                                                <span>Quantity</span>
-                                            </th>
-                                            <th name="th_priceunit" class="text-end " style="width:10%;">
-                                                <span>Unit Price</span>
-                                            </th>
-                                            <th name="th_taxes" class="text-start" style="width:10%;">
-                                                <span>Taxes</span>
-                                            </th>
-                                            <th name="th_subtotal" class="text-end" style="width:10%;">
-                                                <span>Amount</span>
-                                            </th>
-                                        </tr>
-                                        <t t-set="i" t-value="1"/>
-                                        <t t-foreach="o.order_line" t-as="obj">
-                                            <tr style="">
-                                                <td name="account_invoice_line_name">
-                                                    <span style="width:60%; font-size:12px;">
-                                                        <t>
-                                                            <span t-field="obj.name" t-options="{'widget': 'text'}"/>
-                                                        </t>
-
-                                                    </span>
-                                                </td>
-                                                <td class="text-end">
-                                                    <span style="width:10%; font-size:14px;">
-                                                        <t t-esc="obj.product_qty"/>
-                                                    </span>
-                                                </td>
-                                                <td class="text-end">
-                                                    <span class="text-nowrap" style="width:10%; font-size:14px;">
-                                                        <t t-esc="'%.2f'%  obj.price_unit" data-oe-t-inline="true"/>
-                                                    </span>
-                                                </td>
-                                                <td class="text-start">
-                                                    <t t-foreach="obj.taxes_id" t-as="tax">
-                                                        <span id="line_tax_ids" style="width:10%; font-size:14px;">
-                                                            <t t-esc="tax.name"/>
-                                                        </span>
+                                    <tr style="border-bottom:2px solid black;">
+                                        <th name="th_description" class="text-start" style="width:60%;">
+                                            <span>Description</span>
+                                        </th>
+                                        <th name="th_quantity" class="text-end" style="width:10%;">
+                                            <span>Quantity</span>
+                                        </th>
+                                        <th name="th_priceunit" class="text-end " style="width:10%;">
+                                            <span>Unit Price</span>
+                                        </th>
+                                        <th name="th_taxes" class="text-start" style="width:10%;">
+                                            <span>Taxes</span>
+                                        </th>
+                                        <th name="th_subtotal" class="text-end" style="width:10%;">
+                                            <span>Amount</span>
+                                        </th>
+                                    </tr>
+                                    <t t-set="i" t-value="1"/>
+                                    <t t-foreach="o.order_line" t-as="obj">
+                                        <tr style="">
+                                            <td name="account_invoice_line_name">
+                                                <span style="width:60%; font-size:12px;">
+                                                    <t>
+                                                        <span t-field="obj.name" t-options="{'widget': 'text'}"/>
                                                     </t>
 
-                                                </td>
-                                                <td class="text-end o_price_total">
-                                                    <span class="text-nowrap"><span style="width:10%; font-size:14px;"><t t-esc="obj.currency_id.name"/></span>
-                                                        <span class="oe_currency_value"
-                                                              style="width:10%; font-size:14px;">
-                                                            <t t-esc="'%.2f'% obj.price_subtotal"
-                                                               data-oe-t-inline="true"/>
-                                                        </span>
+                                                </span>
+                                            </td>
+                                            <td class="text-end">
+                                                <span style="width:10%; font-size:14px;">
+                                                    <t t-esc="'%.0f'% obj.product_qty" data-oe-t-inline="true"/>
+                                                </span>
+                                            </td>
+                                            <td class="text-end">
+                                                <span class="text-nowrap" style="width:10%; font-size:14px;">
+                                                    <span t-field="obj.price_unit" data-oe-t-inline="true"/>
+                                                </span>
+                                                <span style="font-size:14px;">
+                                                    <t t-esc="obj.currency_id.symbol"/>
+                                                </span>
+
+                                            </td>
+                                            <td class="text-start">
+                                                <t t-foreach="obj.taxes_id" t-as="tax">
+                                                    <span id="line_tax_ids" style="width:10%; font-size:14px;">
+                                                        <span t-field="tax.name"/>
                                                     </span>
-                                                </td>
-                                            </tr>
-                                            <t t-set="i" t-value="i+1"/>
-                                        </t>
+                                                </t>
+
+                                            </td>
+                                            <td class="text-end o_price_total">
+                                                <span class="text-nowrap">
+                                                    <span class="oe_currency_value"
+                                                          style="width:10%; font-size:14px;">
+                                                        <span t-field="obj.price_subtotal"
+                                                              data-oe-t-inline="true"/>
+                                                    </span>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <t t-set="i" t-value="i+1"/>
+                                    </t>
                                 </table>
                                 <div class="clearfix">
                                     <div id="total" class="row">
@@ -120,10 +158,10 @@
                                                             <strong>Untaxed Amount</strong>
                                                         </td>
                                                         <td class="text-end">
-                                                            <span><span style="width:10%; font-size:14px;"><t t-esc="obj.currency_id.name"/></span>
+                                                            <span>
                                                                 <span class="oe_currency_value">
-                                                                    <t t-esc="'%.2f'% o.amount_untaxed"
-                                                                       data-oe-t-inline="true"/>
+                                                                    <span t-field="o.amount_untaxed"
+                                                                          data-oe-t-inline="true"/>
                                                                 </span>
                                                             </span>
                                                         </td>
@@ -132,10 +170,10 @@
                                                         <td>
                                                             <span class="text-nowrap">Taxes</span>
                                                         </td>
-                                                        <td class="text-end o_price_total"><span style="width:10%; font-size:14px;"><t t-esc="obj.currency_id.name"/></span>
+                                                        <td class="text-end o_price_total">
                                                             <span class="text-nowrap">
-                                                                <t t-esc="'%.2f'% o.amount_tax"
-                                                                   data-oe-t-inline="true"/>
+                                                                <span t-field="o.amount_tax"
+                                                                      data-oe-t-inline="true"/>
                                                             </span>
                                                         </td>
                                                     </tr>
@@ -144,10 +182,10 @@
                                                             <strong>Total</strong>
                                                         </td>
                                                         <td class="text-end">
-                                                            <span class="text-nowrap"><span style="width:10%; font-size:14px;"><t t-esc="obj.currency_id.name"/></span>
+                                                            <span class="text-nowrap">
                                                                 <span class="oe_currency_value">
-                                                                    <t t-esc="'%.2f'% o.amount_total"
-                                                                       data-oe-t-inline="true"/>
+                                                                    <span t-field="o.amount_total"
+                                                                          data-oe-t-inline="true"/>
                                                                 </span>
                                                             </span>
                                                         </td>
