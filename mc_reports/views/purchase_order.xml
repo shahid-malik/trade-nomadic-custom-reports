@@ -61,8 +61,8 @@
                                             <t t-esc="o.name"/>
                                         </p>
                                     </div>
-                                    <div class="col-3 mw-100 mb-2 mt-3" name="date_order">
-                                        <strong style="font-family: 'Serif'; font-size:15px;">Order Confirmation:
+                                    <div class="col-4 mw-100 mb-2 mt-3" name="date_order">
+                                        <strong style="font-family: 'Serif'; font-size:15px;">Order Confirmation Date:
                                         </strong>
                                         <p class="m-0">
                                             <t t-esc="o.date_order"
@@ -78,7 +78,7 @@
                                                t-options='{"widget": "date","format": "d .MM .y"}'/>
                                         </p>
                                     </div>
-                                    <div class="col-2 mw-100 mb-2 mt-3">
+                                    <div class="col-1 mw-100 mb-2 mt-3">
 
                                     </div>
                                 </div>
