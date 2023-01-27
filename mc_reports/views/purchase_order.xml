@@ -57,13 +57,12 @@
                                     <div class="col-4 mw-100 mb-2 mt-3" name="invoice">
                                         <strong style="font-family: 'Serif'; font-size:16px;">Purchase Order :</strong>
                                         <p class="m-0"
-                                           style="color:#c0c0c0; font-family: 'Serif'; font-weight: bold; font-size:14px;">
+                                           style="font-family: 'Serif';">
                                             <t t-esc="o.name"/>
                                         </p>
                                     </div>
-                                    <div class="col-2 mw-100 mb-2 mt-3" name="date_order">
-                                        <strong style="font-family: 'Serif'; font-weight: lighter; font-size:14px;">RFQ
-                                            Date:
+                                    <div class="col-3 mw-100 mb-2 mt-3" name="date_order">
+                                        <strong style="font-family: 'Serif'; font-size:15px;">Order Confirmation:
                                         </strong>
                                         <p class="m-0">
                                             <t t-esc="o.date_order"
@@ -71,15 +70,15 @@
                                         </p>
                                     </div>
                                     <div class="col-3 mw-100 mb-2 mt-3" name="due_date">
-                                        <strong style="font-family: 'Serif'; font-size:14px;">Due
-                                            Date
+                                        <strong style="font-family: 'Serif'; font-size:15px;">Delivery
+                                            Date:
                                         </strong>
                                         <p class="m-0">
                                             <t t-esc="o.date_planned"
                                                t-options='{"widget": "date","format": "d .MM .y"}'/>
                                         </p>
                                     </div>
-                                    <div class="col-3 mw-100 mb-2 mt-3">
+                                    <div class="col-2 mw-100 mb-2 mt-3">
 
                                     </div>
                                 </div>
@@ -209,10 +208,6 @@
                                 <br></br>
                                 <br></br>
                                 <p style="width:95%; line-height: 2.5; font-family: 'Serif'; font-weight: lighter; font-size:14px;">
-                                    We kindly request your quotation for the attached list of products and / or
-                                    services, to be submitted no later than
-                                    the specified deadline.
-                                    <br></br>
                                     In case of any questions, please feel free to contact your designated contact
                                     partner at Trade Nomadic for further
                                     assistance.

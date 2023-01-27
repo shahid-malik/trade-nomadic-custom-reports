@@ -57,12 +57,12 @@
                                     <div class="col-4 mw-100 mb-2 mt-3" name="invoice">
                                         <strong style="font-family: 'Serif'; font-weight:bold;">Order Confirmation :
                                         </strong>
-                                        <p class="m-0" style="color:#c0c0c0;">
+                                        <p class="m-0" style="">
                                             <t t-esc="o.name"/>
                                         </p>
                                     </div>
                                     <div class="col-3 mw-100 mb-2 mt-3" name="date_order">
-                                        <strong style="font-family: 'Serif'; font-weight: lighter;">Confirmation Date:
+                                        <strong style="font-family: 'Serif';">Confirmation Date:
                                         </strong>
                                         <p class="m-0">
                                             <t t-esc="o.date_order"
@@ -70,7 +70,7 @@
                                         </p>
                                     </div>
                                     <div class="col-3 mw-100 mb-2 mt-3" name="due_date">
-                                        <strong style="font-family: 'Serif'; font-weight: lighter;">Deliver Date
+                                        <strong style="font-family: 'Serif';">Deliver Date:
                                         </strong>
                                         <p class="m-0">
                                             <t t-esc="o.commitment_date"
@@ -199,7 +199,7 @@
                                 <p style="width:95%; line-height:2.2; font-family: 'Serif'; font-weight: lighter; font-size:14px;">
                                     We confirm your order for the attached list of products and services, and thank you
                                     for your business. Our order
-                                    confirmation number is<t t-esc="o.name"/>. The terms of this contract are based on
+                                    confirmation number is <t t-esc="o.name"/>. The terms of this contract are based on
                                     the signed terms and
                                     conditions in the supplier onboarding agreement. This order is confirmed and binding
                                     only once it is approved

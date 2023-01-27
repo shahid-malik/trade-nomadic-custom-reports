@@ -57,12 +57,12 @@
                                     <div class="col-4 mw-100 mb-2 mt-3" name="invoice">
                                         <strong style="font-family: 'Serif'; font-size:16px;">Request for Quote :</strong>
                                         <p class="m-0"
-                                           style="color:#c0c0c0; font-family: 'Serif'; font-weight: bold; font-size:14px;">
+                                           style="font-family: 'Serif';">
                                             <t t-esc="o.name"/>
                                         </p>
                                     </div>
                                     <div class="col-2 mw-100 mb-2 mt-3" name="date_order">
-                                        <strong style="font-family: 'Serif'; font-weight: lighter; font-size:14px;">RFQ
+                                        <strong style="font-family: 'Serif'; font-size:15px;">RFQ
                                             Date:
                                         </strong>
                                         <p class="m-0">
@@ -71,7 +71,7 @@
                                         </p>
                                     </div>
                                     <div class="col-3 mw-100 mb-2 mt-3" name="due_date">
-                                        <strong style="font-family: 'Serif'; font-size:14px;">Due
+                                        <strong style="font-family: 'Serif'; font-size:15px;">Due
                                             Date
                                         </strong>
                                         <p class="m-0">
